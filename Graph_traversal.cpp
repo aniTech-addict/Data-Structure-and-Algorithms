@@ -1,0 +1,61 @@
+#include <vector>
+#include <queue>
+#include <iostream>
+#include <map>
+using namespace std;
+
+class Node{
+    public:
+int data;
+Node *left;
+Node *right;
+
+    Node(int data){
+           this->data = data;
+           this->left = nullptr;
+           this->right = nullptr;
+    }
+};
+
+class Tree{
+    private:
+    Node* tree_root = nullptr;
+
+    public:
+    void insert_node(int data){
+        Node* new_node = new Node(data);
+
+        if (tree_root == nullptr){
+            tree_root = new_node;
+            return;
+        }
+
+        Node* traveller = tree_root;
+        Node* parent = nullptr;
+
+        while(traveller!=nullptr){
+            parent = traveller;
+            if(new_node->data>traveller->data){
+                traveller = traveller->right;
+            }
+            else traveller = traveller->left;
+        }
+
+        if (parent->data < new_node->data) parent->right = new_node;
+        else parent->left = new_node;
+
+    }
+};
+
+int main(){
+Tree my_tree;
+my_tree.insert_node(10);
+my_tree.insert_node(5);
+my_tree.insert_node(15);
+my_tree.insert_node(3);
+my_tree.insert_node(7);
+my_tree.insert_node(12);
+my_tree.insert_node(18);
+
+return 0;
+}

@@ -2,6 +2,7 @@
 #include <queue>
 #include <iostream>
 #include <map>
+#include <stack>
 using namespace std;
 
 class Node{
@@ -22,6 +23,7 @@ class Tree{
     Node* tree_root = nullptr;
 
     public:
+
     void insert_node(int data){
         Node* new_node = new Node(data);
 
@@ -45,6 +47,21 @@ class Tree{
         else parent->left = new_node;
 
     }
+
+    void inorder_traversal(){
+        Node* traveller = tree_root;
+        stack<Node*> st;
+        while(traveller!=nullptr || !st.empty()){
+            while(traveller!=nullptr){
+                st.push(traveller);
+                traveller = traveller -> left;
+            }
+            traveller = st.top();
+            cout<< traveller->data << " ";
+            st.pop();
+            traveller = traveller->right;
+        }
+    }
 };
 
 int main(){
@@ -56,6 +73,8 @@ my_tree.insert_node(3);
 my_tree.insert_node(7);
 my_tree.insert_node(12);
 my_tree.insert_node(18);
+
+my_tree.inorder_traversal();
 
 return 0;
 }

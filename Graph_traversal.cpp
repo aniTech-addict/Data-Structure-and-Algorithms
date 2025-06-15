@@ -48,7 +48,8 @@ class Tree{
 
     }
 
-    void inorder_traversal(){
+    // Accending Order (Left->Root->Right)
+    void assending_inorder_traversal(){
         Node* traveller = tree_root;
         stack<Node*> st;
         while(traveller!=nullptr || !st.empty()){
@@ -60,6 +61,22 @@ class Tree{
             cout<< traveller->data << " ";
             st.pop();
             traveller = traveller->right;
+        }
+    }
+
+    // Descending Order (Right->Root->Left)
+    void descending_inorder_traversal(){
+        Node* traveller = tree_root;
+        stack<Node*> st;
+        while(traveller!=nullptr || !st.empty()){
+            while(traveller!=nullptr){
+                st.push(traveller);
+                traveller = traveller -> right;
+            }
+            traveller = st.top();
+            cout<< traveller->data << " ";
+            st.pop();
+            traveller = traveller->left;
         }
     }
 };
@@ -74,7 +91,9 @@ my_tree.insert_node(7);
 my_tree.insert_node(12);
 my_tree.insert_node(18);
 
-my_tree.inorder_traversal();
+my_tree.assending_inorder_traversal();
+std::cout<<"\n";
+my_tree.descending_inorder_traversal();
 
 return 0;
 }
